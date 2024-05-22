@@ -8,11 +8,12 @@ from django.template import loader
 
 def index(request):
     lastest_question_list = Question.objects.order_by("-pub_date")[:5]
-    template = loader.get_template("polls/index.html")
     context = {
         "latest_question_list": lastest_question_list,
     }
-    return HttpResponse(template.render(context, request))
+    print('request = ', request)
+    print('context = ', context)
+    return render(request, "polls/index.html", context)
 
 
 def detail(request, question_id):
